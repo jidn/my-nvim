@@ -8,6 +8,20 @@ local function desc(originalTable, description)
   return newTable
 end
 
+-- Diagnostic keymaps
+keymap("n", "[d", vim.diagnostic.goto_prev, { desc = "Go to previous [d]iagnostic message" })
+keymap("n", "]d", vim.diagnostic.goto_next, { desc = "Go to next [d]iagnostic message" })
+keymap("n", "<leader>e", vim.diagnostic.open_float, { desc = "Show diagnostic [e]rror messages" })
+keymap("n", "<leader>q", vim.diagnostic.setloclist, { desc = "Open diagnostic [q]uickfix list" })
+
+-- Exit terminal mode in the builtin terminal with a shortcut that is a bit easier
+-- for people to discover. Otherwise, you normally need to press <C-\><C-n>, which
+-- is not what someone will guess without a bit more experience.
+--
+-- NOTE: This won't work in all terminal emulators/tmux/etc. Try your own mapping
+-- or just use <C-\><C-n> to exit terminal mode
+keymap("t", "<Esc><Esc>", "<C-\\><C-n>", { desc = "Exit terminal mode" })
+
 -- Silent keymap option
 local opts = { noremap = true, silent = true }
 -- Set <space> as the leader key
@@ -16,8 +30,8 @@ local opts = { noremap = true, silent = true }
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
-keymap({ "n", "v" }, "<Space>", "<Nop>", { silent = true })
-keymap("n", "<leader>w", ":w<cr>", desc(opts, "Save without shift"))
+keymap("n", "<leader>w", ":w<cr>", desc(opts, "Write current buffer"))
+keymap("n", "<BS>", "^", desc(opts, "Move to beginning of line"))
 
 -- Remap for dealing with word wrap
 keymap("n", "k", "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })

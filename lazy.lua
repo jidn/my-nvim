@@ -1,4 +1,4 @@
--- Install package manager
+-- Install package manager if non-existant `lazypath`
 --    https://github.com/folke/lazy.nvim
 --    `:help lazy.nvim.txt` for more info
 -- Note ":checkhealth lazy" for status
@@ -15,12 +15,11 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
--- NOTE: Automatically add plugins, configuration, etc from `lua/my/plugins/*.lua`
--- For additional information see: https://github.com/folke/lazy.nvim#-structuring-your-plugins
+-- NOTE: Auto add plugins, configuration, etc from `lua/my/plugins/*.lua`
+-- see: https://github.com/folke/lazy.nvim#-structuring-your-plugins
 --
 -- Load a specific plugin
 --  :Lazy load nvim-tree.lua
 require("lazy").setup({
   { import = "my.plugins" },
-  { import = "my.plugins.lsp" },
 })

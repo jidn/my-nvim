@@ -27,6 +27,10 @@ vim.wo.number = true -- show line numbers
 opt.relativenumber = true -- show line numbers as relative to current number
 --opt.numberwidth = 1       -- use 1 column if possible
 
+-- Folding
+opt.foldlevelstart = 4 -- Open all folds by default, zm is not available
+opt.foldnestmax = 4
+
 -- Display
 opt.cursorline = true -- highlight current line
 opt.cursorlineopt = "number" -- highlight current line number
@@ -38,7 +42,8 @@ opt.wrap = false -- display line in one long line
 vim.opt.listchars = {
   tab = "» ", -- show tab with a visible character
   trail = "·", -- show end of line spaces
-  extends = "‥", -- rest of line is off screen
+  nbsp = "␣",
+  -- extends = "‥", -- rest of line is off screen
 }
 opt.list = true -- Use the 'listchars'
 

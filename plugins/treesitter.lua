@@ -3,27 +3,37 @@
 return  {
   -- Highlight, edit, and navigate code
   'nvim-treesitter/nvim-treesitter',
-  event = { "BufReadPre", "BufNewFile" },
   build = ":TSUpdate",
+  event = { "BufReadPre", "BufNewFile" },
   dependencies = {
     "windwp/nvim-ts-autotag",
     'nvim-treesitter/nvim-treesitter-textobjects',
   },
+
+  --    - Incremental selection: Included, see `:help nvim-treesitter-incremental-selection-mod`
+  --    - Show your current context: https://github.com/nvim-treesitter/nvim-treesitter-context
+  --    - Treesitter + textobjects: https://github.com/nvim-treesitter/nvim-treesitter-textobjects
   config = function ()
     local configs = require("nvim-treesitter.configs")
     configs.setup({
       -- Add languages to be installed here that you want installed for treesitter
-      ensure_installed = { 'yaml', 'python', 'bash', 'c', 'cpp',
+      ensure_installed = { 'python', 'bash',
+        -- 'c', 'cpp',
+        "yaml",
         'markdown', 'gitignore',
         'json', --'tsx', 'javascript', 'typescript',
+        'rust',
         'lua', 'vimdoc', 'vim' },
 
       -- Autoinstall languages that are not installed. Defaults to false (but you can change for yourself!)
       -- Dart causes several seconds delay, so for now no auto install 
       -- See https://github.com/nvim-treesitter/nvim-treesitter/issues/4945
-      --auto_install = true,
 
-      highlight = { enable = true },
+      sync_install = false,
+      highlight = {
+        enable = true,
+        additional_vim_regex_highlighting = false,
+      },
       indent = { enable = true },
       incremental_selection = {
         enable = true,
@@ -94,12 +104,12 @@ return  {
         swap = {
           enable = true,
           swap_next = {
-            ['<leader>sa'] = {query="@parameter.inner", desc="[S]wap [A]rgument with next"},
-            ["<leader>sm"] = {query="@function.outer", desc="[S]wap [M]ethod with next"},
+            ['<leader>san'] = {query="@parameter.inner", desc="[s]wap [a]rgument with [n]ext"},
+            ["<leader>smn"] = {query="@function.outer", desc="[s]wap [m]ethod with [n]ext"},
           },
           swap_previous = {
-            ['<leader>sA'] = {query="@parameter.inner", desc="[S]wap [A]rgument with prev"},
-            ["<leader>sM"] = {query="@function.outer", desc="[S]wap [M]ethod with prev"},
+            ['<leader>sap'] = {query="@parameter.inner", desc="[s]wap [a]rgument with [p]rev"},
+            ["<leader>smp"] = {query="@function.outer", desc="[s]wap [m]ethod with [p]rev"},
           },
         },
       },
@@ -117,5 +127,9 @@ return  {
     vim.keymap.set({ "n", "x", "o" }, "F", ts_repeat_move.builtin_F)
     vim.keymap.set({ "n", "x", "o" }, "t", ts_repeat_move.builtin_t)
     vim.keymap.set({ "n", "x", "o" }, "T", ts_repeat_move.builtin_T)
+
+    -- set folding.  See options.lua for other folding related
+    vim.opt.foldmethod = "expr"
+    vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
   end,
 }
