@@ -25,7 +25,7 @@ vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
 -- Set to true if you have a Nerd Font installed and selected in the terminal
-vim.g.have_nerd_font = false
+vim.g.have_nerd_font = true
 
 -- disable netrw per nvim-tree instructions
 vim.g.loaded_netrw = 1
@@ -33,7 +33,6 @@ vim.g.loaded_netrwPlugin = 1
 
 require("my.options")
 require("my.keymaps")
--- Using the lazy package manager.
---
-require("my.lazy")
+require("my.diagnostics") -- vim.diagnostics
+require("my.lazy") -- Using the lazy package manager.
 require("my.auto_au")
