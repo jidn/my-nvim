@@ -49,11 +49,12 @@ return {
         },
       },
       filters = {
+        exclude = {".ruff_cache"},
         custom = { ".DS_Store" },
       },
       git = {
-        enable = false,
-        ignore = false,
+        enable = true,
+        ignore = true,
       },
     })
   end,
