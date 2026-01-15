@@ -1,0 +1,17 @@
+{
+  "Lua": {
+    // Neovim uses LuaJIT (Lua 5.1 compatible)
+    "runtime": {
+      "version": "LuaJIT"
+    },
+    // Tell lua_ls that `vim` is a provided global
+    "diagnostics": {
+      "globals": ["vim"]
+    },
+    // Do not prompt about third-party libraries
+    // (recommended for Neovim configs)
+    "workspace": {
+      "checkThirdParty": false
+    }
+  }
+}
