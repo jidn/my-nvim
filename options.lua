@@ -2,13 +2,13 @@
 -- See `:help vim.o`
 local opt = vim.opt
 
-opt.timeoutlen = 900 -- millisec wait for keymap sequence completion
+opt.timeoutlen = 700 -- millisec wait for keymap sequence completion
 
 -- [[ Search ]]
 opt.ignorecase = true -- ignore case in search patterns
 opt.incsearch = true -- show matches while typing
 opt.smartcase = true -- override ignorecase if pattern has upper chars
-opt.hlsearch = false -- highlight all matches on pattern
+opt.hlsearch = true -- highlight all matches on pattern
 
 -- [[ Whitespace ]]
 opt.tabstop = 2 -- number of spaces in a tab
@@ -21,29 +21,34 @@ opt.copyindent = true -- copy the previous indentation on autoindenting
 opt.shiftround = true -- indent in multiple of shiftwidth with '<' or '>'
 
 -- [[ Window ]]
-
--- Line numbering
-vim.wo.number = true -- show line numbers
-opt.relativenumber = true -- show line numbers as relative to current number
---opt.numberwidth = 1       -- use 1 column if possible
-
--- Folding
-opt.foldlevelstart = 4 -- Open all folds by default, zm is not available
-opt.foldnestmax = 4
+opt.confirm = true -- ask for confirmation before command on unchanged buffer
 
 -- Display
 opt.cursorline = true -- highlight current line
-opt.cursorlineopt = "number" -- highlight current line number
+opt.cursorlineopt = "number,screenline" -- avoid highlighting full line content
 opt.scrolloff = 5 -- minimal lines above/below cursor
 opt.sidescrolloff = 5 -- minimal cols before/after cursor
+opt.showmode = false -- mode is already in status line
 opt.wrap = false -- display line in one long line
+opt.foldlevelstart = 2 -- Start with folds mostly open; manual folding still available
+opt.foldnestmax = 4
 
--- Show invisibles
-vim.opt.listchars = {
+-- Gutter / Statuscolumn (Neovim 0.11+)
+opt.number = true -- show line numbers
+opt.numberwidth = 2
+opt.relativenumber = true -- show line numbers as relative to current number
+opt.signcolumn = "auto" -- `auto` wont for sign into number
+-- %s = sign column, %l = "smart" number column (handles number/relativenumber/width)
+opt.statuscolumn = "%s%l " -- statuscolumn.nvim for bling
+
+-- Display certain whitespace characters in the editor.
+--  See `:help 'list'`
+--  and `:help 'listchars'`
+opt.listchars = {
   tab = "» ", -- show tab with a visible character
   trail = "·", -- show end of line spaces
-  nbsp = "␣",
-  -- extends = "‥", -- rest of line is off screen
+  nbsp = "␣", -- non-breaking space
+  extends = "‥", -- rest of line is off screen
 }
 opt.list = true -- Use the 'listchars'
 
@@ -53,7 +58,6 @@ opt.completeopt = "menuone,noselect"
 
 -- [[ Appearance ]]
 opt.colorcolumn = "80"
-opt.signcolumn = "number" -- put signs in the number column
 opt.termguicolors = true
 -- opt.cmdheight=default(1),  -- screen lines for command-line
 
@@ -65,8 +69,6 @@ opt.undofile = true -- save undo history
 opt.splitright = true
 opt.splitbelow = true
 opt.iskeyword:append("-") -- Now "abc-def" is a whole word.
--- allow system clipboard access with greenclip
---vim.o.clipboard="unnamedplus,unnamed,autoselect,exclude:cons|linux,exclude:CLIPBOARD,exclude:TARGETS,greenclip"
 opt.clipboard = "unnamedplus"
 
 -- [[ Spelling ]]
