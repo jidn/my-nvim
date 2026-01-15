@@ -1,14 +1,21 @@
-return  {
-  -- Set lualine as statusline
-  'nvim-lualine/lualine.nvim',
-  -- See `:help lualine.txt`
+-- See `:help lualine.txt`
+return {
+  "nvim-lualine/lualine.nvim",
   opts = {
+    -- sections = require("visual_studio_code").get_lualine_sections(),
     options = {
-      icons_enabled = false,
-      theme = 'onedark',
-      component_separators = '|',
-      section_separators = '',
+      -- theme = "visual_studio_code",
+      theme = "onedark",
+      icons_enabled = true,
+      component_separators = "",
+      section_separators = "",
+      -- disabled_filetypes = {},
+      globalstatus = true,
+      refresh = {
+        statusline = 200,
+      },
+      path = 4, -- parent/filename
+      -- extensions = { "trouble", "nvim-tree" },
     },
   },
 }
-
