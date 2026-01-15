@@ -16,7 +16,7 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 -- NOTE: Auto add plugins, configuration, etc from `lua/my/plugins/*.lua`
--- see: https://github.com/folke/lazy.nvim#-structuring-your-plugins
+-- see https://lazy.folke.io/usage/structuring
 --
 -- Load a specific plugin
 --  :Lazy load nvim-tree.lua

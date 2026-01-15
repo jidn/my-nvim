@@ -3,7 +3,7 @@ return {
     "numToStr/Comment.nvim",
     event = { "BufReadPre", "BufNewFile" },
   },
-  -- Highlight todo, notes, etc in comments
+  -- Highlight TODO, notes, etc in comments
   {
     "folke/todo-comments.nvim",
     event = "VimEnter",

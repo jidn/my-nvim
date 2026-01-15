@@ -2,7 +2,7 @@
 -- https://github.com/josean-dev/dev-environment-files/blob/main/.config/nvim/lua/josean/plugins/telescope.lua
 -- https://www.youtube.com/watch?v=NL8D8EkphUw&t=780s
 
-return { --[[
+--[[
   Telescope is a fuzzy finder that comes with a lot of different things that
   it can fuzzy find! It's more than just a "file finder", it can search
   many different aspects of Neovim, your workspace, LSP, and more!
@@ -22,12 +22,13 @@ return { --[[
   telescope picker. This is really useful to discover what Telescope can
   do as well as how to actually do it!
   --]]
+
+return { -- Fuzzy Finder (files, lsp, etc)
   "nvim-telescope/telescope.nvim",
   event = "VimEnter",
-  branch = "0.1.x",
   dependencies = {
     "nvim-lua/plenary.nvim",
-    { -- If encountering errors, see telescope-fzf-native README for install instructions
+    { -- If encountering errors, see telescope-fzf-native README for installation instructions
       "nvim-telescope/telescope-fzf-native.nvim",
 
       -- `build` is used to run some command when the plugin is installed/updated.
@@ -42,10 +43,8 @@ return { --[[
     },
     { "nvim-telescope/telescope-ui-select.nvim" },
 
-    -- Useful for getting pretty icons, but requires special font.
-    --  If you already have a Nerd Font, or terminal set up with fallback fonts
-    --  you can enable this
-    { "nvim-tree/nvim-web-devicons" },
+    -- Useful for getting pretty icons, but requires a Nerd Font.
+    { "nvim-tree/nvim-web-devicons", enabled = vim.g.have_nerd_font },
   },
 
   config = function()
@@ -58,8 +57,6 @@ return { --[[
         -- <c-/> to see mappings
 
         path_display = { "smart" },
-        -- prompt_position = "top",
-        -- prompt_prefix = " ",
         selection_caret = " ",
         sorting_strategy = "ascending",
         git_files = {
@@ -90,11 +87,11 @@ return { --[[
     -- set keymaps
     local builtin = require("telescope.builtin")
     local keymap = vim.keymap.set
+    keymap("n", "<leader>sh", builtin.help_tags, { desc = "[s]earch [h]elp nvim" })
     keymap("n", "<leader>sd", builtin.diagnostics, { desc = "[s]earch [d]iagnostics" })
     keymap("n", "<leader>sf", builtin.find_files, { desc = "[s]earch [f]iles" })
     keymap("n", "<leader>sp", builtin.live_grep, { desc = "[s]earch files by [p]attern in cwd" })
     keymap("n", "<leader>sg", builtin.git_files, { desc = "[s]earch files by [g]it " })
-    keymap("n", "<leader>sh", builtin.help_tags, { desc = "[s]earch [h]elp" })
     keymap("n", "<leader>sk", builtin.keymaps, { desc = "[s]earch [k]eymaps" })
     keymap("n", "<leader>ss", builtin.builtin, { desc = "[s]earch [s]elect Telescope" })
     keymap("n", "<leader>sr", builtin.resume, { desc = "[s]earch [r]esume" })
