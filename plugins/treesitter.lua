@@ -17,13 +17,17 @@ return  {
     local configs = require("nvim-treesitter.configs")
     configs.setup({
       -- Add languages to be installed here that you want installed for treesitter
-      ensure_installed = { 'python', 'bash',
-        -- 'c', 'cpp',
-        "yaml",
-        'markdown', 'gitignore',
+      ensure_installed = {
+        'bash',
+        'c', 'cpp',
+        'gitignore',
         'json', --'tsx', 'javascript', 'typescript',
+        'markdown', "markdown_inline",
+        'python',
         'rust',
-        'lua', 'vimdoc', 'vim' },
+        'vimdoc', 'vim', 'lua',
+        'yaml',
+      },
 
       -- Autoinstall languages that are not installed. Defaults to false (but you can change for yourself!)
       -- Dart causes several seconds delay, so for now no auto install 
