@@ -1,5 +1,5 @@
 -- Check for errors or keymap overlaps "healthcheck which-key"
--- To search keymaps ":Telescope keymaps" or <leader>sk
+-- To search keymaps ":map", ":Telescope keymaps", or <leader>sk
 return {
   "folke/which-key.nvim",
   event = "VeryLazy", -- Sets the loading event to 'VimEnter'
@@ -9,14 +9,15 @@ return {
   end,
   keys = {
     -- Document existing key chains
-    { "<leader>c", group = "[c]ode" },
-    { "<leader>d", group = "[d]ocument" },
-    { "<leader>r", group = "[r]ename" },
+    -- { "<leader>c", group = "[c]ode" },
+    -- { "<leader>d", group = "[d]ocument" },
+    -- { "<leader>r", group = "[r]ename" },
     { "<leader>s", group = "[s]earch" },
     { "<leader>t", group = "[t]oggle" },
-    -- { "<leader>w", gruop = "[w]orkspace" },
+    -- { "<leader>w", group = "[w]orkspace" },
   },
 
+  -- TODO: This looks like telescope
   opts = {
     plugins = {
       marks = true, -- shows a list of your marks on ' and `
